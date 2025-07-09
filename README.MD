@@ -107,7 +107,11 @@ cd harmony-ai
 pip install -r requirements.txt
 ```
 
-3️⃣ Organize os checkpoints e
+3️⃣ Baixe e extraia um modelo pré-treinado caso não queira treinar um
+
+- [cat-mel_2bar_big](https://storage.googleapis.com/magentadata/models/music_vae/checkpoints/cat-mel_2bar_big.tar)
+
+4️⃣ Organize os checkpoints e
 garanta a estrutura:
 
 ```bash
@@ -115,14 +119,19 @@ checkpoints/
     rock_model/
     general_model/
 ```
-Aponte o caminho correto para o checkpoint em app.py.
+5️⃣Aponte o caminho e modelo correto para o checkpoint em app.py:
 
-4️⃣ Rode o servidor Flask
+```bash
+checkpoint_file = "C:/tmp/music_vae/train/general/cat-mel_2bar_big.ckpt"
+    config = "cat-mel_2bar_big"
+```
+
+6️⃣ Rode o servidor Flask
 ```bash
 python app.py
 ```
 
-5️⃣ Acesse no navegador
+7️⃣ Acesse no navegador
 
 ```bash
 http://localhost:5000
