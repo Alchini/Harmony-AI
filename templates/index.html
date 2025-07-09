@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root { --background-color: #121212; --text-color: #E0E0E0; --primary-color: #E13D75; --card-background: #181818; --sidebar-background: #000000; --input-background: #2A2A2A; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body { background-color: var(--background-color); color: var(--text-color); font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        .sidebar { width: 240px; background-color: var(--sidebar-background); padding: 24px; display: flex; flex-direction: column; }
+        .sidebar h1 { font-size: 24px; margin-top: 0; margin-bottom: 40px; }
+        .sidebar nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar nav ul li a { color: var(--text-color); text-decoration: none; display: flex; align-items: center; padding: 12px 0; font-size: 16px; font-weight: 500; }
+        .sidebar nav ul li a i { margin-right: 16px; font-size: 20px; }
+        .sidebar nav ul li a.active { color: #FFFFFF; font-weight: 700; }
+        .main-content { flex-grow: 1; padding: 32px 48px; overflow-y: auto; }
+        .creation-section { margin-bottom: 48px; }
+        .creation-section h2 { font-size: 32px; margin-top: 0; margin-bottom: 24px; }
+        .input-container { display: flex; align-items: center; background-color: var(--input-background); border-radius: 50px; padding: 8px; padding-left: 24px; }
+        .input-container input { flex-grow: 1; background: none; border: none; color: var(--text-color); font-size: 16px; outline: none; }
+        .input-container input::placeholder { color: #A0A0A0; }
+        .create-button { background: linear-gradient(90deg, #E13D75, #C7346A); color: #FFFFFF; border: none; border-radius: 50px; padding: 14px 24px; font-size: 16px; font-weight: 500; cursor: pointer; display: flex; align-items: center; transition: background 0.3s ease; white-space: nowrap; }
+        .create-button:disabled { cursor: not-allowed; background: #555; }
+        .create-button i { margin-right: 8px; }
+        .create-button:not(:disabled):hover { background: linear-gradient(90deg, #C7346A, #E13D75); }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h1>Harmony AI</h1>
+        <nav>
+            <ul>
+                <li><a href="/" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="/library"><i class="fa-solid fa-layer-group"></i> Biblioteca</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <section class="creation-section">
+            <h2>Crie qualquer música.</h2>
+            <form action="/generate" method="POST" id="generate-form">
+                <div class="input-container">
+                    <input type="text" name="prompt-input" required placeholder="Heavy Metal Tribal Agressivo com Solo de Guitarra">
+                    <button type="submit" class="create-button">
+                        <i class="fa-solid fa-music"></i>
+                        <span>Criar Música</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script>
+        document.getElementById('generate-form').addEventListener('submit', () => {
+            const button = document.querySelector('.create-button');
+            const icon = button.querySelector('i');
+            const text = button.querySelector('span');
+            button.disabled = true;
+            icon.className = 'fa-solid fa-spinner fa-spin';
+            text.textContent = 'Gerando...';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Harmony AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Seu CSS completo aqui, sem alterações */
+        :root { --background-color: #121212; --text-color: #E0E0E0; --primary-color: #E13D75; --card-background: #181818; --sidebar-background: #000000; --input-background: #2A2A2A; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body { background-color: var(--background-color); color: var(--text-color); font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        .sidebar { width: 240px; background-color: var(--sidebar-background); padding: 24px; display: flex; flex-direction: column; }
+        .sidebar h1 { font-size: 24px; margin-top: 0; margin-bottom: 40px; }
+        .sidebar nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar nav ul li a { color: var(--text-color); text-decoration: none; display: flex; align-items: center; padding: 12px 0; font-size: 16px; font-weight: 500; }
+        .sidebar nav ul li a i { margin-right: 16px; font-size: 20px; }
+        .sidebar nav ul li a.active { color: #FFFFFF; font-weight: 700; }
+        .main-content { flex-grow: 1; padding: 32px 48px; overflow-y: auto; }
+        .results-header { margin-bottom: 24px; }
+        .results-header h2 { font-size: 28px; margin: 0; }
+        .results-header p { font-size: 16px; color: #A0A0A0; margin-top: 8px; font-style: italic; }
+        .results-header a { color: var(--primary-color); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 24px; }
+        .music-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 24px; }
+        .music-card { background-color: var(--card-background); border-radius: 8px; overflow: hidden; padding: 16px; transition: background-color 0.3s ease; }
+        .music-card:hover { background-color: #282828; }
+        .music-card .cover-art { position: relative; margin-bottom: 16px; }
+        .music-card img { width: 100%; border-radius: 6px; display: block; }
+        .music-card .info h3 { font-size: 16px; margin: 0 0 8px 0; }
+        .download-button { display: block; width: 100%; padding: 10px; margin-top: 12px; background-color: var(--primary-color); color: white; text-align: center; text-decoration: none; border-radius: 6px; font-weight: 500; transition: background-color 0.2s; }
+        .download-button:hover { background-color: #C7346A; }
+        .download-button i { margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h1>Harmony AI</h1>
+        <nav>
+            <ul>
+                <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="/library" class="active"><i class="fa-solid fa-layer-group"></i> Biblioteca</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <section class="results-header">
+            <h2>{{ 'Resultados para:' if prompt != 'Sua Biblioteca' else 'Bem-vindo à' }}</h2>
+            <p>"{{ prompt }}"</p>
+            <a href="/"><i class="fa-solid fa-arrow-left"></i> Gerar outra música</a>
+        </section>
+
+        <section class="music-gallery">
+            {% for music in results %}
+            <div class="music-card">
+                <div class="cover-art">
+                    <img src="https://picsum.photos/200/200?random={{ loop.index }}" alt="Capa de álbum gerada">
+                </div>
+                <div class="info">
+                    <h3>{{ music.name }}</h3>
+                </div>
+                <a href="{{ music.url }}" download class="download-button">
+                    <i class="fa-solid fa-download"></i> Baixar MIDI
+                </a>
+            </div>
+            {% else %}
+            <p>Nenhuma música na biblioteca ainda. Que tal <a href="/" style="color: var(--primary-color);">criar a primeira</a>?</p>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
